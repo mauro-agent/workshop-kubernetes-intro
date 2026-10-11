@@ -55,9 +55,9 @@ Current image:
 quay.io/kairos/ubuntu:22.04-standard-arm64-generic-v0.0.1-k3sv1.35.0-k3s1
 
 Available releases with higher version:
-quay.io/kairos/ubuntu:22.04-standard-arm64-generic-v3.7.2-k3s-v1.35.0-k3s3
-quay.io/kairos/ubuntu:22.04-standard-arm64-generic-v3.7.1-k3s-v1.35.0-k3s1
-quay.io/kairos/ubuntu:22.04-standard-arm64-generic-v3.6.0-k3s-v1.34.1-k3s1
+quay.io/kairos/hadron:v0.5.1-standard-arm64-generic-v4.3.0-k3s-v1.36.4-k3s1
+quay.io/kairos/hadron:v0.5.1-standard-arm64-generic-v4.3.0-k3s-v1.35.8-k3s1
+quay.io/kairos/hadron:v0.5.1-standard-arm64-generic-v4.3.0-k3s-v1.34.11-k3s1
 ...
 ```
 
@@ -81,7 +81,7 @@ ssh kairos@<VM_IP>
 
 ```bash
 # Upgrade to a Kairos official image (example)
-sudo kairos-agent upgrade --source oci:quay.io/kairos/ubuntu:22.04-standard-arm64-generic-v3.7.2-k3s-v1.35.0-k3s3
+sudo kairos-agent upgrade --source oci:quay.io/kairos/hadron:v0.5.1-standard-arm64-generic-v4.3.0-k3s-v1.36.4-k3s1
 
 # Or upgrade to your custom image
 sudo kairos-agent upgrade --source oci:ttl.sh/kairos-custom-fedora:2h

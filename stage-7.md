@@ -74,7 +74,7 @@ ssh kairos@<WORKER_IP> "sudo kairos-agent upgrade list-releases"  # if multi-nod
 ```
 
 > [!NOTE]
-> Different nodes can show different available images based on their OS flavor (e.g. Ubuntu vs Fedora) — the operator can upgrade each node to its own flavor's latest version.
+> Different nodes can show different available images based on their OS flavor (e.g. Hadron vs Ubuntu) — the operator can upgrade each node to its own flavor's latest version.
 
 Create the upgrade manifest, replacing `spec.image` with the image you intend to upgrade to:
 
@@ -87,7 +87,7 @@ metadata:
   namespace: default
 spec:
   # The container image containing the new Kairos version
-  image: quay.io/kairos/ubuntu:22.04-standard-amd64-generic-v3.7.2-k3s-v1.35.0-k3s3
+  image: quay.io/kairos/hadron:v0.5.1-standard-amd64-generic-v4.3.0-k3s-v1.36.4-k3s1
 
   # NodeSelector to target specific nodes (optional)
   nodeSelector:
@@ -182,7 +182,7 @@ kind: NodeOpUpgrade
 metadata:
   name: kairos-canary-upgrade
 spec:
-  image: quay.io/kairos/ubuntu:22.04-standard-amd64-generic-v3.7.2-k3s-v1.35.0-k3s3
+  image: quay.io/kairos/hadron:v0.5.1-standard-amd64-generic-v4.3.0-k3s-v1.36.4-k3s1
   nodeSelector:
     matchLabels:
       kairos.io/canary: "true"
