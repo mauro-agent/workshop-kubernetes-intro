@@ -31,11 +31,11 @@ cat /etc/kairos-release | grep -E "KAIROS_VERSION|KAIROS_FLAVOR|KAIROS_SOFTWARE_
 
 Example output:
 ```
-KAIROS_FLAVOR="ubuntu"
-KAIROS_FLAVOR_RELEASE="22.04"
-KAIROS_SOFTWARE_VERSION="v1.35.0+k3s1"
+KAIROS_FLAVOR="hadron"
+KAIROS_FLAVOR_RELEASE="v0.5.1"
+KAIROS_SOFTWARE_VERSION="v1.35.8+k3s1"
 KAIROS_SOFTWARE_VERSION_PREFIX="k3s"
-KAIROS_VERSION="v0.0.1"
+KAIROS_VERSION="v4.3.0"
 ```
 
 ## Choose an upgrade source
@@ -48,18 +48,17 @@ List available upgrade images directly from the VM:
 sudo kairos-agent upgrade list-releases
 ```
 
-Example output:
+Example output, from a node that runs an older K3s version than the latest image:
 ```
 Using registry: quay.io/kairos
 Current image:
-quay.io/kairos/ubuntu:22.04-standard-arm64-generic-v0.0.1-k3sv1.35.0-k3s1
+quay.io/kairos/hadron:v0.5.1-standard-amd64-generic-v4.3.0-k3sv1.35.8-k3s1
 
 Available releases with higher version:
-quay.io/kairos/hadron:v0.5.1-standard-arm64-generic-v4.3.0-k3s-v1.36.4-k3s1
-quay.io/kairos/hadron:v0.5.1-standard-arm64-generic-v4.3.0-k3s-v1.35.8-k3s1
-quay.io/kairos/hadron:v0.5.1-standard-arm64-generic-v4.3.0-k3s-v1.34.11-k3s1
 ...
 ```
+
+If the node already runs the newest release, the command prints `No newer releases found`. Pick the image tag by hand then, as in the next section.
 
 Browse all images at: https://quay.io/organization/kairos
 
