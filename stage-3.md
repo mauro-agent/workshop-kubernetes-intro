@@ -90,7 +90,7 @@ podman machine set --rootful
 podman machine start
 ```
 
-If you have build the `stage-3` Image before, you have to rebuild it after switching to rootful as seen above.
+If you have built the `stage-3` Image before, you have to rebuild it after switching to rootful as seen above.
 
 Since Podman has issues using the local image, we will temporarily push it to a public registry.
 

@@ -77,7 +77,7 @@ ssh kairos@<WORKER_IP> "sudo kairos-agent upgrade list-releases"  # if multi-nod
 ```
 
 > [!NOTE]
-> Different nodes can show different available images based on their OS flavor (e.g. Hadron vs Ubuntu) — the operator can upgrade each node to its own flavor's latest version.
+> Different nodes can show different available images based on their OS flavor (e.g. Hadron vs Ubuntu). The operator can upgrade each node to its own flavor's latest version.
 
 Create the upgrade manifest, replacing `spec.image` with the image you intend to upgrade to.
 

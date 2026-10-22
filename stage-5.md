@@ -48,7 +48,7 @@ List available upgrade images directly from the VM:
 sudo kairos-agent upgrade list-releases
 ```
 
-Example output, from a node that runs an older K3s version than the latest image:
+Example output, from an amd64 node that runs an older K3s version than the latest image (on an arm64 node the image names say `arm64`):
 ```
 Using registry: quay.io/kairos
 Current image:
@@ -64,7 +64,7 @@ Browse all images at: https://quay.io/organization/kairos
 
 ### Option 2: Your custom image from Stage 3/4
 
-If you built a custom image in [Stage 3](stage-3.md) and pushed it via [Stage 4](stage-4.md)'s pipeline, use that image reference, e.g. `ttl.sh/kairos-custom-fedora:2h`.
+If you built a custom image in [Stage 3](stage-3.md) and pushed it via [Stage 4](stage-4.md)'s pipeline, use that image reference, e.g. `ttl.sh/stage-3:24h`.
 
 > **Note:** because of the "all or nothing" nature of Kairos upgrades, an upgrade is just a full OS replacement — so it can as well be a downgrade to an older image.
 
@@ -83,7 +83,7 @@ ssh kairos@<VM_IP>
 sudo kairos-agent upgrade --source oci:quay.io/kairos/hadron:v0.5.1-standard-arm64-generic-v4.3.0-k3s-v1.36.4-k3s1
 
 # Or upgrade to your custom image
-sudo kairos-agent upgrade --source oci:ttl.sh/kairos-custom-fedora:2h
+sudo kairos-agent upgrade --source oci:ttl.sh/stage-3:24h
 sudo reboot
 ```
 
