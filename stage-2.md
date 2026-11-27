@@ -207,7 +207,7 @@ kubectl get nodes
 You should see an output like this one:
 
 ```
-NAME          STATUS   ROLES                  AGE     VERSION
+NAME          STATUS   ROLES           AGE     VERSION
 kairos-e0a8   Ready    control-plane   6m38s   v1.34.11+k3s1
 ```
 
