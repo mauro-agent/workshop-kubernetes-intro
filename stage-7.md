@@ -84,7 +84,11 @@ As in [Stage 5](stage-5.md), the command can print `No newer releases found` whi
 Create the upgrade manifest, replacing `spec.image` with the image you intend to upgrade to.
 
 > [!IMPORTANT]
-> Use an image that differs from the one your node runs now. If the node already runs that exact version, the operator skips it (`Skipped by preflight: node is already at ...`) and nothing reboots. The example below moves a node from the K3s v1.35.8 that [Stage 5](stage-5.md) installs to v1.36.4. On arm64 nodes, replace `amd64` with `arm64` in the image name. The example is for nodes that run the official Hadron image. If your nodes run your [Stage 3](stage-3.md) image, build it again with K3s v1.36.4 and use that reference.
+> Use an image that differs from the one your node runs now. If the node already runs that exact version, the operator skips it (`Skipped by preflight: node is already at ...`) and nothing reboots. The example below moves a node from the K3s v1.35.8 that [Stage 5](stage-5.md) installs to v1.36.4. On arm64 nodes, replace `amd64` with `arm64` in the image name. The example is for nodes that run the official Hadron image.
+>
+> - If you skipped Stage 5, your node runs v1.34.11. Use the v1.35.8 tag first, because an upgrade must not skip a K3s minor version.
+> - If your nodes run your [Stage 3](stage-3.md) image, build it again with K3s v1.36.4, push it to a registry that the nodes can reach, and use that reference.
+> - A worker must not run a newer K3s than the control plane. When one resource selects both, the operator upgrades the control-plane nodes first.
 
 ```bash
 cat > upgrade.yaml <<'EOF'
@@ -179,10 +183,10 @@ spec:
 
 ### Canary deployment
 
-Instead of selecting every node, as in Step 3, upgrade a subset first. As above, replace `amd64` with `arm64` on arm64 nodes:
+Instead of selecting every node, as in Step 3, upgrade a subset first. Start with the control-plane node, because a worker must not run a newer K3s than the control plane. As above, replace `amd64` with `arm64` on arm64 nodes:
 
 ```bash
-kubectl label node kairos-worker-xxxxx kairos.io/canary=true
+kubectl label node <CONTROL_PLANE_NODE> kairos.io/canary=true
 
 cat > upgrade-canary.yaml <<'EOF'
 apiVersion: operator.kairos.io/v1alpha1

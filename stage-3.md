@@ -95,17 +95,17 @@ If you have built the `stage-3` Image before, you have to rebuild it after switc
 Since Podman has issues using the local image, we will temporarily push it to a public registry.
 
 > [!WARNING]
-> `ttl.sh` is public and anybody can push to the same name. Replace `stage-3` in the `ttl.sh` references with a name that only you use.
+> `ttl.sh` is public and anybody can push to the same name. Replace `<your-name>` with a name that only you use.
 
 ```bash
-podman tag localhost/stage-3:v1.0.0 ttl.sh/stage-3:24h
-podman push ttl.sh/stage-3:24h
+podman tag localhost/stage-3:v1.0.0 ttl.sh/<your-name>-stage-3:24h
+podman push ttl.sh/<your-name>-stage-3:24h
 ```
 
 Then we can use the public images to build the ISO
 
 ```bash
-mkdir build && sudo podman run -it --rm -v /var/run/docker.sock:/var/run/docker.sock:Z -v $PWD/build:/result quay.io/kairos/auroraboot:latest build-iso --output /result ttl.sh/stage-3:24h
+mkdir build && sudo podman run -it --rm -v /var/run/docker.sock:/var/run/docker.sock:Z -v $PWD/build:/result quay.io/kairos/auroraboot:latest build-iso --output /result ttl.sh/<your-name>-stage-3:24h
 ```
 
 ## Create an ISO using AuroraBoot

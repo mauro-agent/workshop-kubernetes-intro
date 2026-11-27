@@ -121,7 +121,7 @@ mkdir -p build && sudo podman run -it --rm \
   -v /var/run/docker.sock:/var/run/docker.sock:Z \
   -v $PWD/build:/result \
   quay.io/kairos/auroraboot:latest \
-  build-iso --output /result ttl.sh/stage-3:24h
+  build-iso --output /result ttl.sh/<your-name>-stage-3:24h
 ```
 
 ### Build it locally (Linux only)

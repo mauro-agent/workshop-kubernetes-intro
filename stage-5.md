@@ -64,7 +64,7 @@ Browse all images at: https://quay.io/organization/kairos
 
 ### Option 2: Your custom image from Stage 3/4
 
-If you built a custom image in [Stage 3](stage-3.md) or [Stage 4](stage-4.md) and pushed it to a registry, use that image reference. The Podman path in Stage 3 pushes to `ttl.sh/stage-3:24h`, or to the name you chose.
+If you built a custom image in [Stage 3](stage-3.md) or [Stage 4](stage-4.md) and pushed it to a registry, use that image reference. The Podman path in Stage 3 pushes to `ttl.sh/<your-name>-stage-3:24h`.
 
 The Stage 3 image has K3s v1.35.8, the same version as the official image below. If you built with another version, do not skip a K3s minor version.
 
@@ -89,7 +89,7 @@ sudo reboot
 To upgrade to your custom image instead, run this:
 
 ```bash
-sudo kairos-agent upgrade --source oci:ttl.sh/stage-3:24h
+sudo kairos-agent upgrade --source oci:ttl.sh/<your-name>-stage-3:24h
 sudo reboot
 ```
 
