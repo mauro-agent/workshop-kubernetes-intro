@@ -115,7 +115,7 @@ sudo su -i
 kubectl get nodes -o wide
 ```
 
-You should see both nodes:
+You should see both nodes. This example is from two nodes that run the [Stage 3](stage-3.md) image. `VERSION` and `OS-IMAGE` follow the image that each node runs:
 
 ```
 NAME                     STATUS   ROLES           AGE     VERSION        INTERNAL-IP      OS-IMAGE

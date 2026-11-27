@@ -51,7 +51,7 @@ NAME                                       READY   STATUS    RESTARTS   AGE
 operator-kairos-operator-xxxxxxxxxx-xxxxx  1/1     Running   0          30s
 ```
 
-Wait for the pod to be `Running` before proceeding.
+The namespace also gets `kairos-node-labeler` pods. Wait for the operator pod to be `Running` before proceeding.
 
 ## Step 2: Label nodes for upgrade
 
@@ -82,7 +82,7 @@ ssh kairos@<WORKER_IP> "sudo kairos-agent upgrade list-releases"  # if multi-nod
 Create the upgrade manifest, replacing `spec.image` with the image you intend to upgrade to.
 
 > [!IMPORTANT]
-> Use an image that differs from the one your node runs now. If the node already runs that exact version, the operator skips it (`Skipped by preflight: node is already at ...`) and nothing reboots. If you upgraded to K3s v1.36.4 in [Stage 5](stage-5.md), use the K3s v1.35.8 tag below.
+> Use an image that differs from the one your node runs now. If the node already runs that exact version, the operator skips it (`Skipped by preflight: node is already at ...`) and nothing reboots. The example below moves a node from the K3s v1.35.8 that [Stage 5](stage-5.md) installs to v1.36.4. On arm64 nodes, replace `amd64` with `arm64` in the image name.
 
 ```bash
 cat > upgrade.yaml <<'EOF'
@@ -93,7 +93,7 @@ metadata:
   namespace: default
 spec:
   # The container image containing the new Kairos version
-  image: quay.io/kairos/hadron:v0.5.1-standard-amd64-generic-v4.3.0-k3s-v1.35.8-k3s1
+  image: quay.io/kairos/hadron:v0.5.1-standard-amd64-generic-v4.3.0-k3s-v1.36.4-k3s1
 
   # NodeSelector to target specific nodes (optional)
   nodeSelector:
@@ -177,7 +177,7 @@ spec:
 
 ### Canary deployment
 
-Upgrade a subset of nodes first:
+Instead of upgrading every node at once, as in Step 3, upgrade a subset first. As above, replace `amd64` with `arm64` on arm64 nodes:
 
 ```bash
 kubectl label node kairos-worker-xxxxx kairos.io/canary=true

@@ -35,11 +35,11 @@ Select K3s version:
   [1] k3sv1.36.4+k3s1 (latest)
   [2] k3sv1.35.8+k3s1
   [3] k3sv1.34.11+k3s1
-Choice [1-3]: 2
+Choice [1-3]: 3
 ```
 
 > [!IMPORTANT]
-> Pick `k3sv1.35.8+k3s1`, not the latest. [Stage 5](stage-5.md) upgrades the node to `v1.36.4`, and that only works if you start on an older version.
+> Pick `k3sv1.34.11+k3s1`, the oldest one. [Stage 5](stage-5.md) upgrades the node to `v1.35.8` and [Stage 7](stage-7.md) upgrades it to `v1.36.4`. Starting on the oldest version makes both steps real upgrades.
 
 The ISO is fetched for your architecture and cached; `kairos-lab` tracks it for cleanup later.
 
@@ -58,10 +58,10 @@ kairos-lab start
 This creates a new disk, go ahead and give it a name like `kairos-stage1`:
 
 ```
-❯ /tmp/claude/kairos-lab-main/kairos-lab start
-Using the only downloaded ISO: kairos-hadron-v0.5.1-standard-arm64-generic-v4.3.0-k3sv1.35.8+k3s1.iso
+❯ kairos-lab start
+Using the only downloaded ISO: kairos-hadron-v0.5.1-standard-arm64-generic-v4.3.0-k3sv1.34.11+k3s1.iso
 
-Suggested disk name: kairos-hadron-v0.5.1-standard-arm64-generic-v4.3.0-k3sv1.35.8+k3s1-20260929-111913
+Suggested disk name: kairos-hadron-v0.5.1-standard-arm64-generic-v4.3.0-k3sv1.34.11+k3s1-20260929-111913
 Press Enter to accept, or type a new name: kairos-stage1
 ```
 
@@ -75,7 +75,7 @@ VM Configuration:
   1) Disk name:    kairos-stage1
   2) Disk path:    /Users/mauro/Library/Caches/kairos-lab/vm/kairos-stage1.qcow2
   3) Disk size:    60 GB  (131 GB free)
-  4) ISO:          kairos-hadron-v0.5.1-standard-arm64-generic-v4.3.0-k3sv1.35.8+k3s1.iso
+  4) ISO:          kairos-hadron-v0.5.1-standard-arm64-generic-v4.3.0-k3sv1.34.11+k3s1.iso
   5) Memory:       8 GB  (24 GB available)
   6) CPUs:         2  (12 logical CPUs on host)
   7) Network:      shared
@@ -208,7 +208,7 @@ You should see an output like this one:
 
 ```
 NAME          STATUS   ROLES                  AGE     VERSION
-kairos-e0a8   Ready    control-plane,master   6m38s   v1.32.10+k3s1
+kairos-e0a8   Ready    control-plane   6m38s   v1.34.11+k3s1
 ```
 
 ### Access the cluster from your host (optional)
