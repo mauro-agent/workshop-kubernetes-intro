@@ -58,13 +58,15 @@ Available releases with higher version:
 No newer releases found
 ```
 
-The command can print `No newer releases found` even when an image with a newer K3s version exists, as it does here. Pick the image tag by hand then, as in the next section.
+The command can print `No newer releases found` even when an image with a newer K3s version exists, as it does here. Pick the image tag by hand then, as in the next section. The command writes `k3sv1.34.11` in the current image name. To pull an image, use the spelling on quay.io, with `k3s-v`.
 
 Browse all images at: https://quay.io/organization/kairos
 
 ### Option 2: Your custom image from Stage 3/4
 
-If you built a custom image in [Stage 3](stage-3.md) or [Stage 4](stage-4.md) and pushed it to a registry, use that image reference. The Podman path in Stage 3 pushes to `ttl.sh/stage-3:24h`.
+If you built a custom image in [Stage 3](stage-3.md) or [Stage 4](stage-4.md) and pushed it to a registry, use that image reference. The Podman path in Stage 3 pushes to `ttl.sh/stage-3:24h`, or to the name you chose.
+
+The Stage 3 image has K3s v1.35.8, the same version as the official image below. If you built with another version, do not skip a K3s minor version.
 
 > **Note:** because of the "all or nothing" nature of Kairos upgrades, an upgrade is just a full OS replacement — so it can as well be a downgrade to an older image.
 
@@ -81,8 +83,12 @@ ssh kairos@<VM_IP>
 ```bash
 # Upgrade to a Kairos official image (replace amd64 with arm64 on an arm64 node)
 sudo kairos-agent upgrade --source oci:quay.io/kairos/hadron:v0.5.1-standard-amd64-generic-v4.3.0-k3s-v1.35.8-k3s1
+sudo reboot
+```
 
-# Or upgrade to your custom image
+To upgrade to your custom image instead, run this:
+
+```bash
 sudo kairos-agent upgrade --source oci:ttl.sh/stage-3:24h
 sudo reboot
 ```

@@ -13,7 +13,7 @@ In this stage, we'll create a 2-node Kubernetes cluster:
 
 - A working master VM, per [Stage 2](stage-2.md)
 - At least ~12GB RAM free (8GB master + 4GB worker is a comfortable split)
-- A Kairos ISO for the worker — reuse the one you already downloaded, or run `kairos-lab download` again to try a different flavor (the operator in [Stage 7](stage-7.md) can mix flavors across nodes)
+- A Kairos ISO for the worker. Run `kairos-lab download` again and pick the K3s version that your master runs (`v1.35.8` if you did [Stage 5](stage-5.md)). A worker must not run a newer K3s than the master
 
 ## Select your installation source
 
@@ -119,8 +119,8 @@ You should see both nodes. This example is from two nodes that run the [Stage 3]
 
 ```
 NAME                     STATUS   ROLES           AGE     VERSION        INTERNAL-IP      OS-IMAGE
-kairos-xxxx              Ready    control-plane   1d      v1.36.4+k3s1   192.168.20.150   Ubuntu 24.04.5 LTS
-kairos-worker-xxxx       Ready    <none>          5m      v1.36.4+k3s1   192.168.20.151   Ubuntu 24.04.5 LTS
+kairos-xxxx              Ready    control-plane   1d      v1.35.8+k3s1   192.168.20.150   Ubuntu 24.04.5 LTS
+kairos-worker-xxxx       Ready    <none>          5m      v1.35.8+k3s1   192.168.20.151   Ubuntu 24.04.5 LTS
 ```
 
 ### Test workload distribution

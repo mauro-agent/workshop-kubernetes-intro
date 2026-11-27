@@ -50,7 +50,7 @@ RUN --mount=type=bind,from=quay.io/kairos/kairos-init:v4.3.0,src=/kairos-init,ds
     /kairos-init --stage all \
       --level debug \
       --provider k3s \
-      --provider-k3s-version "v1.36.4+k3s1" \
+      --provider-k3s-version "v1.35.8+k3s1" \
       --version "${VERSION}"
 ```
 
@@ -93,6 +93,9 @@ podman machine start
 If you have built the `stage-3` Image before, you have to rebuild it after switching to rootful as seen above.
 
 Since Podman has issues using the local image, we will temporarily push it to a public registry.
+
+> [!WARNING]
+> `ttl.sh` is public and anybody can push to the same name. Replace `stage-3` in the `ttl.sh` references with a name that only you use.
 
 ```bash
 podman tag localhost/stage-3:v1.0.0 ttl.sh/stage-3:24h

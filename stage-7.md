@@ -76,13 +76,15 @@ ssh kairos@<MASTER_IP> "sudo kairos-agent upgrade list-releases"
 ssh kairos@<WORKER_IP> "sudo kairos-agent upgrade list-releases"  # if multi-node
 ```
 
+As in [Stage 5](stage-5.md), the command can print `No newer releases found` while a newer image exists.
+
 > [!NOTE]
-> Different nodes can show different available images based on their OS flavor (e.g. Hadron vs Ubuntu). The operator can upgrade each node to its own flavor's latest version.
+> Nodes can run different OS flavors (e.g. Hadron and Ubuntu). One `NodeOpUpgrade` sets one image for all the nodes it selects, so use one resource per flavor, each with its own `nodeSelector`.
 
 Create the upgrade manifest, replacing `spec.image` with the image you intend to upgrade to.
 
 > [!IMPORTANT]
-> Use an image that differs from the one your node runs now. If the node already runs that exact version, the operator skips it (`Skipped by preflight: node is already at ...`) and nothing reboots. The example below moves a node from the K3s v1.35.8 that [Stage 5](stage-5.md) installs to v1.36.4. On arm64 nodes, replace `amd64` with `arm64` in the image name.
+> Use an image that differs from the one your node runs now. If the node already runs that exact version, the operator skips it (`Skipped by preflight: node is already at ...`) and nothing reboots. The example below moves a node from the K3s v1.35.8 that [Stage 5](stage-5.md) installs to v1.36.4. On arm64 nodes, replace `amd64` with `arm64` in the image name. The example is for nodes that run the official Hadron image. If your nodes run your [Stage 3](stage-3.md) image, build it again with K3s v1.36.4 and use that reference.
 
 ```bash
 cat > upgrade.yaml <<'EOF'
@@ -150,7 +152,7 @@ kairos-479e     Ready                      90s   # Upgrade complete
 
 ```bash
 kubectl get nodes -o wide
-ssh kairos@<VM_IP> "cat /etc/kairos-release | grep KAIROS_VERSION"
+ssh kairos@<VM_IP> "cat /etc/kairos-release | grep KAIROS_SOFTWARE_VERSION="
 ```
 
 ## Upgrade strategies
@@ -177,7 +179,7 @@ spec:
 
 ### Canary deployment
 
-Instead of upgrading every node at once, as in Step 3, upgrade a subset first. As above, replace `amd64` with `arm64` on arm64 nodes:
+Instead of selecting every node, as in Step 3, upgrade a subset first. As above, replace `amd64` with `arm64` on arm64 nodes:
 
 ```bash
 kubectl label node kairos-worker-xxxxx kairos.io/canary=true
